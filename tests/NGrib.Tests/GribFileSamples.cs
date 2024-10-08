@@ -111,6 +111,11 @@
 		public static string NcepGefsWaveFile { get; } = "samples/gefs.wave.t00z.c00.global.0p25.f000.grib2";
 
 		/// <summary>
+		/// NCEP GEFS 
+		/// </summary>
+		public static string NcepGefsChemFile { get; } = "samples/gefs.chem.t18z.a2d_0p25.f000.grib2";
+
+		/// <summary>
 		/// NCEP GEFS P8 20200825/06+02 Forecasts (0.5 degree grid)
 		/// Contains all variable on subregion
 		/// </summary>
@@ -139,6 +144,5 @@
 		public static string EcmwfTmp2mDataTemplate42 { get; } = "samples/ecmwf-aifs-0p25-20240802060000-18h-oper-fc-tmp_2m.grib2";
 
 		public static string WaveComplexPacking { get; } = "samples/wave-complex-packing.grib2";
-		
 	}
 }
