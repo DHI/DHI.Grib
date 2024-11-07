@@ -70,5 +70,41 @@ namespace NGrib.Tests
 			var inverseFrequency = parameters.First(p => p.Value.Code == 25);
 			Check.That(inverseFrequency.Value.Name).Equals("Inverse mean wave frequency");
 		}
+
+		[Fact]
+		public void Read_ProductDefinition48_Test()
+		{
+			using var stream = File.OpenRead(GribFileSamples.NcepGefsChemFile);
+			var reader = new Grib2Reader(stream);
+
+			var dataSets = reader.ReadAllDataSets().ToArray();
+
+			Check.That(dataSets).CountIs(32);
+
+			var parameters = dataSets.Select(ds => ds.Parameter).ToArray();
+			Check.That(parameters).ContainsNoNull();
+
+			Check.That(dataSets).ContainsOnlyElementsThatMatch(ds => ds.ProductDefinitionSection.ProductDefinitionTemplateNumber == 48);
+
+			var productDefinitions = dataSets.Select(ds => ds.ProductDefinitionSection.ProductDefinition).ToArray();
+			Check.That(productDefinitions).ContainsOnlyInstanceOfType(typeof(ProductDefinition0048));
+
+			var productDefinitions48 = productDefinitions.OfType<ProductDefinition0048>().ToArray();
+			Check.That(productDefinitions48).ContainsOnlyElementsThatMatch(pd => pd.GeneratingProcessType == GeneratingProcessType.Forecast);
+			Check.That(productDefinitions48.Select(pd => pd.AerosolType)).Contains(AerosolType.TotalAerosol, AerosolType.DustDry, AerosolType.SeaSaltDry, AerosolType.BlackCarbonDry);
+			Check.That(productDefinitions48.Select(pd => pd.ForecastTime)).Contains(0);
+
+			var chemicals = productDefinitions48.Where(pd => pd.Parameter.Value.Category.Code == 20).ToArray();
+			Check.That(chemicals).ContainsOnlyElementsThatMatch(pd => pd.FirstFixedSurfaceType == FixedSurfaceType.EntireAtmosphere);
+
+			var opticalThickness = chemicals.First(c => c.Parameter.Value.Code == 102);
+			Check.That(opticalThickness.Parameter.Value.Name).Equals("Aerosol Optical Thickness");
+
+			var aerosols = productDefinitions48.Where(pd => pd.Parameter.Value.Category.Code == 13).ToArray();
+			Check.That(aerosols).ContainsOnlyElementsThatMatch(pd => pd.FirstFixedSurfaceType == FixedSurfaceType.GroundOrWaterSurface);
+
+			var particulateMatterCourse = aerosols.First(c => c.Parameter.Value.Code == 192);
+			Check.That(particulateMatterCourse.Parameter.Value.Name).Equals("Particulate matter (coarse)");
+		}
 	}
 }

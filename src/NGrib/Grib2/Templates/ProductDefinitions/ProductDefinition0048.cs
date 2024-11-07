@@ -127,7 +127,7 @@ public class ProductDefinition0048 : Template, IProductDefinition
 		Parameter = CodeTables.Parameter.Get(discipline, centerCode, ParameterCategory, ParameterNumber);
 
 		//12-13
-		AerosolType = (AerosolType)reader.ReadInt16();
+		AerosolType = (AerosolType)reader.ReadUInt16();
 
 		//14
 		IntervalTypeSize = (IntervalType)reader.ReadInt8();
@@ -139,7 +139,7 @@ public class ProductDefinition0048 : Template, IProductDefinition
 		ScaledValueSecondSize = reader.ReadScaledValue();
 
 		//25 
-		IntervalTypeWaveLength = (IntervalType)reader.ReadInt8();
+		IntervalTypeWaveLength = (IntervalType)reader.ReadUInt8();
 
 		//26-30
 		ScaledValueFirstWavelength = reader.ReadScaledValue();
