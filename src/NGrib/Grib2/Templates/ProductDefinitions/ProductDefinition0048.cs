@@ -6,7 +6,7 @@ namespace NGrib.Grib2.Templates.ProductDefinitions;
 /// <summary>
 /// Product Definition Template 4.32: Analysis or Forecast at a horizontal level or in a horizontal layer at a point in time for simulated (synthetic) satellite data
 /// </summary>
-public class ProductDefinition0048 : Template, IProductDefinition
+public class ProductDefinition0048 : Template, ILeveledProductDefinition
 {
 	/// <inheritdoc/>
 	public long Offset { get; }

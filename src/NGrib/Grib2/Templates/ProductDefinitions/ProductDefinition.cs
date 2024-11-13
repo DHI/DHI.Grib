@@ -54,6 +54,13 @@ namespace NGrib.Grib2.Templates.ProductDefinitions
 		/// </summary>
 		public GeneratingProcessType GeneratingProcessType { get; }
 
+
+		/// <inheritdoc />>
+		public abstract TimeRangeUnit TimeRangeUnit { get; }
+
+		/// <inheritdoc />>
+		public abstract int ForecastTime { get; }
+
 		private protected ProductDefinition(BufferedBinaryReader reader, Discipline discipline, int centerCode)
 		{
 			Offset = reader.Position;
