@@ -4,8 +4,8 @@
         <TargetFrameworks>netstandard2.0;net8</TargetFrameworks>
         <LangVersion>latest</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Authors>Nicolas Mangué</Authors>
-        <Company/>
+        <Company>DHI</Company>
+        <Authors>dhigroup</Authors>
         <Description>NGrib is a .NET Standard library to read GRIB (GRid in Binary) files. GRIB is a gridded data standard from WMO (World Meteorological Organisation) and is used by many meteorological organisation.</Description>
         <Copyright>Copyright ©2024</Copyright>
         <PackageId>DHI.Grib</PackageId>
@@ -14,7 +14,7 @@
         <PackageReleaseNotes>
             Support for parameter type 48
         </PackageReleaseNotes>
-        <Version>0.13.1</Version>
+        <Version>0.13.2-rc01</Version>
         <AssemblyVersion>$(Version).0</AssemblyVersion>
         <FileVersion>$(Version).0</FileVersion>
     </PropertyGroup>
