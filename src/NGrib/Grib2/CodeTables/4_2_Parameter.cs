@@ -1472,15 +1472,20 @@ namespace NGrib.Grib2.CodeTables
 
 		///<summary>Direction of combined wind waves and swell (deg)</summary>
 		public static Parameter DirectionOfCombinedWindWavesAndSwell { get; } = new Parameter(ParameterCategory.Waves, 14,
-			"Direction of combined wind waves and swell", "m");
+			"Direction of combined wind waves and swell", "Degree true");
 
 		///<summary>Period of combined wind waves and swell (s)</summary>
 		public static Parameter PeriodOfCombinedWindWavesAndSwell { get; } = new Parameter(ParameterCategory.Waves, 15,
-			"Period of combined wind waves and swell", "m");
+			"Period of combined wind waves and swell", "s");
 
 		///<summary>Inverse mean wave frequency</summary>
 		public static Parameter InverseMeanWaveFrequency { get; } = new Parameter(ParameterCategory.Waves, 25,
-			"Inverse mean wave frequency", "m");
+			"Inverse mean wave frequency", "s");
+
+        ///<summary>Peak wave period</summary>
+        public static Parameter PeakWavePeriod { get; } = new Parameter
+			(ParameterCategory.Waves, 34,
+			  "Peak wave period", "s");
 
 		#endregion
 

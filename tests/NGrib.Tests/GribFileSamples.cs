@@ -138,6 +138,8 @@
 
 		public static string EcmwfTmp2mDataTemplate42 { get; } = "samples/ecmwf-aifs-0p25-20240802060000-18h-oper-fc-tmp_2m.grib2";
 
-		public static string EastChina_Japan { get; } = "samples/eastchina_japan.grb2";
+		public static string EcmwfGrib2Pp1dFile { get; } = "samples/ecmwf.20241001z12.pp1d.l0.r0p25.1.grb2";
+
+        public static string EastChina_Japan { get; } = "samples/eastchina_japan.grb2";
 	}
 }
