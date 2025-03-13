@@ -2,17 +2,17 @@
  * This file is part of NGrib.
  *
  * Copyright © 2020 Nicolas Mangué
- * 
+ *
  * NGrib is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * NGrib is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with NGrib.  If not, see <https://www.gnu.org/licenses/>.
  */
@@ -120,8 +120,12 @@ namespace NGrib.Grib2.CodeTables
 			new ParameterCategory(Discipline.MeteorologicalProducts, 18, "Nuclear/radiology");
 
 		///<summary>Physical atmospheric properties</summary>
-		public static ParameterCategory PhysicalAtmosphericProperties { get; } = new ParameterCategory(Discipline.MeteorologicalProducts,
-			19, "Physical atmospheric properties");
+		public static ParameterCategory PhysicalAtmosphericProperties { get; } =
+			new ParameterCategory(Discipline.MeteorologicalProducts, 19, "Physical atmospheric properties");
+
+		///<summary>Atmospheric Chemical Constituents</summary>
+		public static ParameterCategory AtmosphericChemicalConstituents { get; } =
+			new ParameterCategory(Discipline.MeteorologicalProducts, 20, "Atmospheric Chemical Constituents");
 
 		///<summary>CCITT IA5 string</summary>
 		public static ParameterCategory CcittIa5String { get; } =
@@ -208,6 +212,7 @@ namespace NGrib.Grib2.CodeTables
 				.Add(Electrodynamics)
 				.Add(NuclearRadiology)
 				.Add(PhysicalAtmosphericProperties)
+				.Add(AtmosphericChemicalConstituents)
 				.Add(CcittIa5String)
 				.Add(Miscellaneous)
 				.Add(HydrologyBasicProducts)
@@ -225,6 +230,6 @@ namespace NGrib.Grib2.CodeTables
 				.Add(SurfaceProperties)
 				.Add(SubSurfaceProperties)
 				.GroupBy(c => c.Discipline)
-				.ToDictionary(g => g.Key, g => (IReadOnlyCollection<ParameterCategory>) g.ToImmutableList());
+				.ToDictionary(g => g.Key, g => (IReadOnlyCollection<ParameterCategory>)g.ToImmutableList());
 	}
 }

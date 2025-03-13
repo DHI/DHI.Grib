@@ -2,17 +2,17 @@
  * This file is part of NGrib.
  *
  * Copyright © 2020 Nicolas Mangué
- * 
+ *
  * NGrib is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * NGrib is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with NGrib.  If not, see <https://www.gnu.org/licenses/>.
  */
@@ -57,7 +57,9 @@ namespace NGrib.Grib2.CodeTables
 		public bool LocalUse { get; }
 
 		private Parameter(ParameterCategory category, int code, string name, string unit)
-			: this(category, code, name, unit, false) { }
+			: this(category, code, name, unit, false)
+		{
+		}
 
 		internal Parameter(ParameterCategory category, int code, string name, string unit, bool localUse = true)
 		{
@@ -74,7 +76,7 @@ namespace NGrib.Grib2.CodeTables
 			{
 				var category = categories.Where(c => c.Code == parameterCategory).ToArray();
 				if (category.Any() && ParametersByCategoryWithLocalTables(centerCode)
-							.TryGetValue(category[0], out var parameters))
+					    .TryGetValue(category[0], out var parameters))
 				{
 					var parameter = parameters.Where(p => p.Code == parameterNumber).ToArray();
 					if (parameter.Any())
@@ -874,7 +876,7 @@ namespace NGrib.Grib2.CodeTables
 
 		///<summary>Surface short-wave (solar) radiation downwards (J m-2)</summary>
 		public static Parameter SurfaceShortWaveRadiationDownwards { get; } = new Parameter(ParameterCategory.ShortWaveRadiation, 7,
-						"Surface short-wave (solar) radiation downwards", "J m-2");
+			"Surface short-wave (solar) radiation downwards", "J m-2");
 
 		#endregion
 
@@ -1068,6 +1070,22 @@ namespace NGrib.Grib2.CodeTables
 		public static Parameter AerosolType { get; } =
 			new Parameter(ParameterCategory.Aerosols, 0, "Aerosol type", "Code table (4.205)");
 
+		///<summary>Particulate matter (coarse)</summary>
+		public static Parameter ParticulateMatterCourse { get; } =
+			new Parameter(ParameterCategory.Aerosols, 192, "Particulate matter (coarse)", "µg m-3");
+
+		///<summary>Particulate matter (fine)</summary>
+		public static Parameter ParticulateMatterFine { get; } =
+			new Parameter(ParameterCategory.Aerosols, 193, "Particulate matter (fine)", "µg m-3");
+
+		///<summary>Particulate matter (fine) log</summary>
+		public static Parameter ParticulateMatterFineLog { get; } =
+			new Parameter(ParameterCategory.Aerosols, 194, "Particulate matter (fine) log", "log10(µg m-3)");
+
+		///<summary>Particulate matter (coarse)</summary>
+		public static Parameter IntegratedColumnParticularMatterFine { get; } =
+			new Parameter(ParameterCategory.Aerosols, 195, "Integrated column particulate matter (fine)", "log10(µg m-3)");
+
 		#endregion
 
 		#region Product Discipline 0: Meteorological products, Parameter Category 14: Trace Gases
@@ -1246,6 +1264,202 @@ namespace NGrib.Grib2.CodeTables
 		///<summary>Weather (Code Table 4.225)</summary>
 		public static Parameter Weather { get; } =
 			new Parameter(ParameterCategory.PhysicalAtmosphericProperties, 25, "Weather", "Code Table 4.225");
+
+		#endregion
+
+		#region Product Discipline 0: Meteorological products, Parameter Category 20 Atmospheric Chemical Constituents category
+
+		public static Parameter MassDensity { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 0, "Mass Density", "kg m-3");
+
+		public static Parameter ColumnIntegratedMassDensity { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 1, "Column-Integrated Mass Density", "kg m-2");
+
+		public static Parameter MassMixingRatio { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 2, "Mass Mixing Ratio", "kg kg-1");
+
+		public static Parameter AtmosphereEmissionMassFlux { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 3, "Atmosphere Emission Mass Flux", "kg m-2s-1");
+
+		public static Parameter AtmosphereNetProductionMassFlux { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 4, "Atmosphere Net Production Mass Flux", "kg m-2s-1");
+
+		public static Parameter AtmosphereNetProductionAndEmissionMassFlux { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 5, "Atmosphere Net Production And Emission Mass Flux", "kg m-2s-1");
+
+		public static Parameter SurfaceDryDepositionMassFlux { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 6, "Surface Dry Deposition Mass Flux", "kg m-2s-1");
+
+		public static Parameter SurfaceWetDepositionMassFlux { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 7, "Surface Wet Deposition Mass Flux", "kg m-2s-1");
+
+		public static Parameter AtmosphereReEmissionMassFlux { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 8, "Atmosphere Re-Emission Mass Flux", "kg m-2s-1");
+
+		public static Parameter WetDepositionByLargeScalePrecipitationMassFlux { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 9, "Wet Deposition by Large-Scale Precipitation Mass Flux", "kg m-2s-1");
+
+		public static Parameter WetDepositionByConvectivePrecipitationMassFlux { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 10, "Wet Deposition by Convective Precipitation Mass Flux", "kg m-2s-1");
+
+		public static Parameter SedimentationMassFlux { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 11, "Sedimentation Mass Flux", "kg m-2s-1");
+
+		public static Parameter DryDepositionMassFlux { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 12, "Dry Deposition Mass Flux", "kg m-2s-1");
+
+		public static Parameter TransferFromHydrophobicToHydrophilic { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 13, "Transfer From Hydrophobic to Hydrophilic", "kg kg-1s-1");
+
+		public static Parameter TransferFromSO2ToSO4 { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 14, "Transfer From SO2 (Sulphur Dioxide) to SO4 (Sulphate)", "kg kg-1s-1");
+
+		public static Parameter DryDepositionVelocity { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 15, "Dry deposition velocity", "m s-1");
+
+		public static Parameter MassMixingRatioWithRespectToDryAir { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 16, "Mass mixing ratio with respect to dry air", "kg kg-1");
+
+		public static Parameter MassMixingRatioWithRespectToWetAir { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 17, "Mass mixing ratio with respect to wet air", "kg kg-1");
+
+		public static Parameter PotentialOfHydrogen { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 18, "Potential of hydrogen (pH)", "pH");
+
+		public static Parameter AmountInAtmosphere { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 50, "Amount in Atmosphere", "mol");
+
+		public static Parameter ConcentrationInAir { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 51, "Concentration In Air", "mol m-3");
+
+		public static Parameter VolumeMixingRatio { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 52, "Volume Mixing Ratio", "mol mol-1");
+
+		public static Parameter ChemicalGrossProductionRateOfConcentration { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 53, "Chemical Gross Production Rate of Concentration", "mol m-3s-1");
+
+		public static Parameter ChemicalGrossDestructionRateOfConcentration { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 54, "Chemical Gross Destruction Rate of Concentration", "mol m-3s-1");
+
+		public static Parameter SurfaceFlux { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 55, "Surface Flux", "mol m-2s-1");
+
+		public static Parameter ChangesOfAmountInAtmosphere { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 56, "Changes Of Amount in Atmosphere", "mol s-1");
+
+		public static Parameter TotalYearlyAverageBurdenOfTheAtmosphere { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 57, "Total Yearly Average Burden of The Atmosphere", "mol");
+
+		public static Parameter TotalYearlyAverageAtmosphericLoss { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 58, "Total Yearly Average Atmospheric Loss", "mol s-1");
+
+		public static Parameter AerosolNumberConcentration { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 59, "Aerosol Number Concentration", "m-3");
+
+		public static Parameter AerosolSpecificNumberConcentration { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 60, "Aerosol Specific Number Concentration", "kg-1");
+
+		public static Parameter MaximumOfMassDensity { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 61, "Maximum of Mass Density", "kg m-3");
+
+		public static Parameter HeightOfMassDensity { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 62, "Height of Mass Density", "m");
+
+		public static Parameter ColumnAveragedMassDensityInLayer { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 63, "Column-Averaged Mass Density in Layer", "kg m-3");
+
+		public static Parameter MoleFractionWithRespectToDryAir { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 64, "Mole fraction with respect to dry air", "mol mol-1");
+
+		public static Parameter MoleFractionWithRespectToWetAir { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 65, "Mole fraction with respect to wet air", "mol mol-1");
+
+		public static Parameter ColumnIntegratedInCloudScavengingRateByPrecipitation { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 66, "Column-integrated in-cloud scavenging rate by precipitation", "kg m-2 s-1");
+
+		public static Parameter ColumnIntegratedBelowCloudScavengingRateByPrecipitation { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 67, "Column-integrated below-cloud scavenging rate by precipitation", "kg m-2 s-1");
+
+		public static Parameter ColumnIntegratedReleaseRateFromEvaporatingPrecipitation { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 68, "Column-integrated release rate from evaporating precipitation", "kg m-2 s-1");
+
+		public static Parameter ColumnIntegratedInCloudScavengingRateByLargeScalePrecipitation { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 69, "Column-integrated in-cloud scavenging rate by large-scale precipitation", "kg m-2 s-1");
+
+		public static Parameter ColumnIntegratedBelowCloudScavengingRateByLargeScalePrecipitation { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 70, "Column-integrated below-cloud scavenging rate by large-scale precipitation", "kg m-2 s-1");
+
+		public static Parameter ColumnIntegratedReleaseRateFromEvaporatingLargeScalePrecipitation { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 71, "Column-integrated release rate from evaporating large-scale precipitation", "kg m-2 s-1");
+
+		public static Parameter ColumnIntegratedInCloudScavengingRateByConvectivePrecipitation { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 72, "Column-integrated in-cloud scavenging rate by convective precipitation", "kg m-2 s-1");
+
+		public static Parameter ColumnIntegratedBelowCloudScavengingRateByConvectivePrecipitation { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 73, "Column-integrated below-cloud scavenging rate by convective precipitation", "kg m-2 s-1");
+
+		public static Parameter ColumnIntegratedReleaseRateFromEvaporatingConvectivePrecipitation { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 74, "Column-integrated release rate from evaporating convective precipitation", "kg m-2 s-1");
+
+		public static Parameter WildfireFlux { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 75, "Wildfire flux", "kg m-2 s-1");
+
+		public static Parameter EmissionRate { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 76, "Emission Rate", "kg kg-1 s-1");
+
+		public static Parameter SurfaceEmissionFlux { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 77, "Surface Emission flux", "kg m-2 s-1");
+
+		public static Parameter ColumnIntegratedEastwardMassFlux { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 78, "Column integrated eastward mass flux", "kg m-2 s-1");
+
+		public static Parameter ColumnIntegratedNorthwardMassFlux { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 79, "Column integrated northward mass flux", "kg m-2 s-1");
+
+		public static Parameter ColumnIntegratedDivergenceOfMassFlux { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 80, "Column integrated divergence of mass flux", "kg m-2 s-1");
+
+		public static Parameter ColumnIntegratedNetSource { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 81, "Column integrated net source", "kg m-2 s-1");
+
+		public static Parameter SurfaceAreaDensity { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 100, "Surface Area Density (Aerosol)", "m-1");
+
+		public static Parameter VerticalVisualRange { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 101, "Vertical Visual Range", "m");
+
+		public static Parameter AerosolOpticalThickness { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 102, "Aerosol Optical Thickness", "Numeric");
+
+		public static Parameter SingleScatteringAlbedo { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 103, "Single Scattering Albedo", "Numeric");
+
+		public static Parameter AsymmetryFactor { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 104, "Asymmetry Factor", "Numeric");
+
+		public static Parameter AerosolExtinctionCoefficient { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 105, "Aerosol Extinction Coefficient", "m-1");
+
+		public static Parameter AerosolAbsorptionCoefficient { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 106, "Aerosol Absorption Coefficient", "m-1");
+
+		public static Parameter AerosolLidarBackscatterFromSatellite { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 107, "Aerosol Lidar Backscatter from Satellite", "m-1sr-1");
+
+		public static Parameter AerosolLidarBackscatterFromTheGround { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 108, "Aerosol Lidar Backscatter from the Ground", "m-1sr-1");
+
+		public static Parameter AerosolLidarExtinctionFromSatellite { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 109, "Aerosol Lidar Extinction from Satellite", "m-1");
+
+		public static Parameter AerosolLidarExtinctionFromTheGround { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 110, "Aerosol Lidar Extinction from the Ground", "m-1");
+
+		public static Parameter AngstromExponent { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 111, "Angstrom Exponent", "Numeric");
+
+		public static Parameter ScatteringAerosolOpticalThickness { get; } =
+			new Parameter(ParameterCategory.AtmosphericChemicalConstituents, 112, "Scattering Aerosol Optical Thickness", "Numeric");
 
 		#endregion
 
@@ -1578,11 +1792,11 @@ namespace NGrib.Grib2.CodeTables
 #if NET5_0_OR_GREATER
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties)]
 #endif
-            Type parentClassType) {
-            
-            PropertyInfo[] propertyInfos = parentClassType.GetProperties()
-			                                              .Where(pi => pi.PropertyType == typeof(Parameter))
-			                                              .ToArray();
+			Type parentClassType)
+		{
+			PropertyInfo[] propertyInfos = parentClassType.GetProperties()
+				.Where(pi => pi.PropertyType == typeof(Parameter))
+				.ToArray();
 			var parameters = new List<Parameter>(propertyInfos.Length);
 			foreach (PropertyInfo propertyInfo in propertyInfos)
 			{
@@ -1595,11 +1809,10 @@ namespace NGrib.Grib2.CodeTables
 		private static IReadOnlyDictionary<ParameterCategory, IReadOnlyCollection<Parameter>>
 			BuildParameterDictionary(IList<Parameter> parameters)
 		{
-
 			return parameters.GroupBy(c => c.Category)
-											 .ToDictionary(
-												 g => g.Key,
-												 g => (IReadOnlyCollection<Parameter>)g.ToImmutableList());
+				.ToDictionary(
+					g => g.Key,
+					g => (IReadOnlyCollection<Parameter>)g.ToImmutableList());
 		}
 
 		public static IReadOnlyDictionary<ParameterCategory, IReadOnlyCollection<Parameter>> ParametersByCategory
@@ -1621,7 +1834,6 @@ namespace NGrib.Grib2.CodeTables
 		public static IReadOnlyDictionary<ParameterCategory, IReadOnlyCollection<Parameter>>
 			ParametersByCategoryWithLocalTables(int centerCode)
 		{
-
 			if (centerCode < 0 || centerCode > 254) return ParametersByCategory;
 
 			if (ParametersByCategoryWithLocalTablesCache == null || centerCode != previousCenterCodeCache)
@@ -1642,6 +1854,7 @@ namespace NGrib.Grib2.CodeTables
 
 			return ParametersByCategoryWithLocalTablesCache;
 		}
+
 		private static IReadOnlyDictionary<ParameterCategory, IReadOnlyCollection<Parameter>> ParametersByCategoryWithLocalTablesCache = null;
 		private static int previousCenterCodeCache = -1;
 	}

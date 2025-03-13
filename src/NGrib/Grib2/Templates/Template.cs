@@ -2,17 +2,17 @@
  * This file is part of NGrib.
  *
  * Copyright © 2020 Nicolas Mangué
- * 
+ *
  * NGrib is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * NGrib is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with NGrib.  If not, see <https://www.gnu.org/licenses/>.
  */
@@ -23,7 +23,7 @@ using System.Collections.Generic;
 
 namespace NGrib.Grib2.Templates
 {
-	public abstract class Template
+	public abstract class Template : ITemplate
 	{
 		private readonly Dictionary<TemplateContent, Func<object>> _accessors = new Dictionary<TemplateContent, Func<object>>();
 
@@ -40,7 +40,7 @@ namespace NGrib.Grib2.Templates
 		{
 			if (_accessors.TryGetValue(content, out var methodInfo))
 			{
-				result = (T) methodInfo.Invoke();
+				result = (T)methodInfo.Invoke();
 				return true;
 			}
 
@@ -50,7 +50,7 @@ namespace NGrib.Grib2.Templates
 
 		protected TimeSpan? CalculateTimeRangeFrom(TimeRangeUnit rangeUnit, long value)
 		{
-			switch(rangeUnit)
+			switch (rangeUnit)
 			{
 				case TimeRangeUnit.Minute:
 					return TimeSpan.FromMinutes(value);
@@ -61,11 +61,11 @@ namespace NGrib.Grib2.Templates
 				case TimeRangeUnit.Month:
 					return TimeSpan.FromDays(value);
 				case TimeRangeUnit.Hours3:
-					return TimeSpan.FromHours(value*3);
+					return TimeSpan.FromHours(value * 3);
 				case TimeRangeUnit.Hours6:
-					return TimeSpan.FromDays(value*6);
+					return TimeSpan.FromDays(value * 6);
 				case TimeRangeUnit.Hours12:
-					return TimeSpan.FromDays(value*12);
+					return TimeSpan.FromDays(value * 12);
 				case TimeRangeUnit.Second:
 					return TimeSpan.FromSeconds(value);
 				default:
