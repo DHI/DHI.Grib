@@ -14,7 +14,7 @@
         <PackageReleaseNotes>
             Support for parameter type 48
         </PackageReleaseNotes>
-        <Version>0.13.2-rc01</Version>
+        <Version>0.13.2</Version>
         <AssemblyVersion>$(Version).0</AssemblyVersion>
         <FileVersion>$(Version).0</FileVersion>
     </PropertyGroup>
@@ -29,7 +29,7 @@
     <PropertyGroup>
         <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsAotCompatible>
     </PropertyGroup>
-
+ 
     <ItemGroup>
         <PackageReference Include="CSJ2K.NetCore" Version="3.0.0"/>
         <PackageReference Include="Libaec" Version="0.2.0"/>
