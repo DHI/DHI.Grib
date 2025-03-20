@@ -1,49 +1,45 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net8</TargetFrameworks>
-    <LangVersion>latest</LangVersion>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Nicolas Mangué</Authors>
-    <Company />
-    <Description>NGrib is a .NET Standard library to read GRIB (GRid in Binary) files. GRIB is a gridded data standard from WMO (World Meteorological Organisation) and is used by many meteorological organisation.</Description>
-    <Copyright>Copyright ©2024</Copyright>
-    <PackageLicenseExpression>LGPL-3.0-or-later</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/nmangue/NGrib</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/nmangue/NGrib.git</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>
-		Add .NET 8 target
-		Add support for template 5.42 CCSDS recommended lossless compression
-		Add support for reading more wave parameters. Thankes @da-br
-		Update System.Drawing.Common transitive dependency. Thanks @ArnimSchinz!
-	</PackageReleaseNotes>
-    <Version>0.12.0</Version>
-    <AssemblyVersion>$(Version).0</AssemblyVersion>
-    <FileVersion>$(Version).0</FileVersion>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.0;net8</TargetFrameworks>
+        <LangVersion>latest</LangVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Company>DHI</Company>
+        <Authors>dhigroup</Authors>
+        <Description>NGrib is a .NET Standard library to read GRIB (GRid in Binary) files. GRIB is a gridded data standard from WMO (World Meteorological Organisation) and is used by many meteorological organisation.</Description>
+        <Copyright>Copyright ©2024</Copyright>
+        <PackageId>DHI.Grib</PackageId>
+        <PackageLicenseExpression>LGPL-3.0-or-later</PackageLicenseExpression>
+        <RepositoryType>git</RepositoryType>
+        <PackageReleaseNotes>
+            Support for parameter type 48
+        </PackageReleaseNotes>
+        <Version>0.13.2</Version>
+        <AssemblyVersion>$(Version).0</AssemblyVersion>
+        <FileVersion>$(Version).0</FileVersion>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <PackageVersion>$(Version)-pre</PackageVersion>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-	<PackageReadmeFile>README.md</PackageReadmeFile>
-  </PropertyGroup>
+    <PropertyGroup>
+        <PackageVersion>$(Version)</PackageVersion>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsAotCompatible>
-  </PropertyGroup>
+    <PropertyGroup>
+        <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsAotCompatible>
+    </PropertyGroup>
+ 
+    <ItemGroup>
+        <PackageReference Include="CSJ2K.NetCore" Version="3.0.0"/>
+        <PackageReference Include="Libaec" Version="0.2.0"/>
+        <PackageReference Include="System.Collections.Immutable" Version="8.0.0"/>
+        <PackageReference Include="System.Drawing.Common" Version="8.0.7"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="CSJ2K.NetCore" Version="3.0.0" />
-    <PackageReference Include="Libaec" Version="0.2.0" />
-    <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
-    <PackageReference Include="System.Drawing.Common" Version="8.0.7" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
-    <Folder Include="Grib1\" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+        <Folder Include="Grib1\"/>
+    </ItemGroup>
 
 </Project>

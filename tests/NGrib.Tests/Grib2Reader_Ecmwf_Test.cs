@@ -2,6 +2,8 @@
 using System.IO;
 using System.Linq;
 using NFluent;
+using NGrib.Grib2.CodeTables;
+using NGrib.Grib2.Templates.ProductDefinitions;
 using Xunit;
 
 namespace NGrib.Tests
@@ -35,5 +37,34 @@ namespace NGrib.Tests
 				Check.That(data[c].Value).IsCloseTo(v, 1e-4f);
 			}
 		}
-	}
+
+        [Fact]
+        public void TortuePeakWavePeriod()
+        {
+            using var stream = File.OpenRead(GribFileSamples.EcmwfGrib2Pp1dFile);
+            var reader = new Grib2Reader(stream);
+
+            var datasets = reader.ReadAllDataSets().ToArray();
+
+            const int expectedEnsembleForecastsNumber = 51;
+            const int expectedPerturbationNumber = 0;
+
+            int perturbationNumber;
+            int ensembleForecastsNumber;
+
+            var tmpDataSet = datasets[0];
+
+            Check.That(tmpDataSet.Parameter.Equals(Parameter.PeakWavePeriod)).IsTrue();
+
+            Check.That(tmpDataSet.ProductDefinitionSection.ProductDefinition.TryGet(ProductDefinitionContent.EnsembleForecastsNumber, out ensembleForecastsNumber)).IsTrue();
+
+            Check.That(ensembleForecastsNumber).IsEqualTo(expectedEnsembleForecastsNumber);
+
+            Check.That(tmpDataSet.ProductDefinitionSection.TryGet(ProductDefinitionContent.PerturbationNumber, out perturbationNumber)).IsTrue();
+
+            Check.That(perturbationNumber).IsEqualTo(expectedPerturbationNumber);
+
+            var data = reader.ReadDataSetValues(tmpDataSet).ToDictionary(kv => kv.Key, kv => kv.Value);
+        }
+    }
 }

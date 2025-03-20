@@ -935,6 +935,9 @@ namespace NGrib.Grib2.CodeTables
 		[Description("Inverse mean wave frequency")]
 		InverseMeanWaveFrequency = 25,
 
+		/// <summary>Peak wav period</summary>
+		[Description("Peak wave period")]
+		PeakWavePeriod = 34,
 
 		#endregion
 

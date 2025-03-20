@@ -11,3 +11,6 @@ artifacts/
 *.sln.ide
 .vs/
 .idea/
+/src/NGrib/nuget/*.log
+/src/NGrib/nuget/20250313-165204.log
+/src/NGrib/nuget/20250313-165310.log
