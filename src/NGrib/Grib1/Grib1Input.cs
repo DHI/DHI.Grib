@@ -284,7 +284,7 @@ namespace NGrib.Grib1
 					// Read Section 1 Product Definition Section PDS
 					pds = new Grib1ProductDefinitionSection(InputStream);
 					if (pds.LengthErr)
-						continue;
+                        continue;
 
 					if (pds.gdsExists())
 					{

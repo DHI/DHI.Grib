@@ -138,8 +138,11 @@
 		/// Contains a subset of data for one hour 
 		/// </summary>
 		public static string HarmonieOneHourFile { get; } = "samples/HA40_N55_202306100000_00100_GB";
-		
-		public static string IconD2SatelliteFile { get; } = "samples/icon-d2_germany_regular-lat-lon_single-level_2024030203_000_2d_synmsg_bt_cl_wv6.2.grib2";
+        public static string ECMWFFileA1S { get; } = "samples/A1S03190600032300001_Trimmed.grb";
+        public static string ECMWFFileA1M { get; } = "samples/A1M03130000031608001.grb2";
+        public static string ECMWFFileA1D { get; } = "samples/A1D03180000031801001_Trimmed.grb";
+
+        public static string IconD2SatelliteFile { get; } = "samples/icon-d2_germany_regular-lat-lon_single-level_2024030203_000_2d_synmsg_bt_cl_wv6.2.grib2";
 
 		public static string EcmwfTmp2mDataTemplate42 { get; } = "samples/ecmwf-aifs-0p25-20240802060000-18h-oper-fc-tmp_2m.grib2";
 
