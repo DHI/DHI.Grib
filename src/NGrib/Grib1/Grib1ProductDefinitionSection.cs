@@ -401,36 +401,41 @@ namespace NGrib.Grib1
 		/// </remarks>
 		public int[] CustomData { get; }
 
-		// *** constructors *******************************************************
+        // *** constructors *******************************************************
 
-		/// <summary> Constructs a <tt>Grib1ProductDefinitionSection</tt> object from a raf.
-		/// 
-		/// </summary>
-		/// <param name="raf">with PDS content
-		/// 
-		/// </param>
-		/// <throws>  NotSupportedException  if raf contains no valid GRIB file </throws>
-		//UPGRADE_TODO: Class 'java.io.RandomAccessFile' was converted to 'System.IO.FileStream' which has a different behavior. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1073_javaioRandomAccessFile'"
-		internal Grib1ProductDefinitionSection(System.IO.Stream raf)
-		{
-			// octets 1-3 PDS length
-			length = (int) GribNumbers.uint3(raf);
+        /// <summary> Constructs a <tt>Grib1ProductDefinitionSection</tt> object from a raf.
+        /// 
+        /// </summary>
+        /// <param name="raf">with PDS content
+        /// 
+        /// </param>
+        /// <throws>  NotSupportedException  if raf contains no valid GRIB file </throws>
+        //UPGRADE_TODO: Class 'java.io.RandomAccessFile' was converted to 'System.IO.FileStream' which has a different behavior. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1073_javaioRandomAccessFile'"
+        internal Grib1ProductDefinitionSection(System.IO.Stream raf)
+        {
+            // octets 1-3 PDS length
+            length = (int)GribNumbers.uint3(raf);
 
+            if (length <= 0)
+            {
+                lengthErr = true;
+                return;
+            }
 
-			// Paramter table octet 4
-			table_version = raf.ReadByte();
+            // Paramter table octet 4
+            table_version = raf.ReadByte();
 
-			// Center  octet 5
-			center_id = raf.ReadByte();
+            // Center  octet 5
+            center_id = raf.ReadByte();
 
-			// octet 6 Generating Process - See Table A
-			process_id = raf.ReadByte();
+            // octet 6 Generating Process - See Table A
+            process_id = raf.ReadByte();
 
-			// octet 7 (id of grid type) - not supported yet
-			grid_id = raf.ReadByte();
+            // octet 7 (id of grid type) - not supported yet
+            grid_id = raf.ReadByte();
 
-			//octet 8 (flag for presence of GDS and BMS)
-			int exists = raf.ReadByte();
+            //octet 8 (flag for presence of GDS and BMS)
+            int exists = raf.ReadByte();
 			//BKSystem.IO.BitStream s = new BKSystem.IO.BitStream(8);
 //            s.WriteByte((byte)raf.ReadByte());
 //            s.Position = 0;
