@@ -12,7 +12,8 @@
         <PackageLicenseExpression>LGPL-3.0-or-later</PackageLicenseExpression>
         <RepositoryType>git</RepositoryType>
         <PackageReleaseNotes>
-            Add WMO parameter (discipline 0, category 5, number 3): surface long-wave (thermal) radiation downwards
+            Add WMO parameter (discipline 0, category 5, number 3): surface long-wave (thermal) radiation downwards.
+            Fix complex-packing/spatial-differencing (template 5.3) decode of constant fields encoded with zero groups.
         </PackageReleaseNotes>
         <Version>0.13.4</Version>
         <AssemblyVersion>$(Version).0</AssemblyVersion>
