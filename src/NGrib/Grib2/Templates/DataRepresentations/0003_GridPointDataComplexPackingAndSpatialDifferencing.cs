@@ -66,6 +66,12 @@ namespace NGrib.Grib2.Templates.DataRepresentations
 
             try
             {
+                // ArrayPool.Rent returns a buffer that may hold stale data. For a constant field encoded
+                // with zero groups (NumberOfGroups == 0, e.g. an all-reference-value field), the group loop
+                // below never writes secVal, so it must be zeroed first - otherwise the leftover garbage
+                // flows through the spatial-differencing reconstruction into the output.
+                Array.Clear(secVal, 0, (int)dataPointsNumber);
+
                 var bufRef = dataSection.DataOffset;
 
                 var refP = NumberOfGroups * NumberOfBits;

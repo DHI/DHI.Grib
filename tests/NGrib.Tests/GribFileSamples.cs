@@ -151,5 +151,12 @@
 		public static string WaveComplexPacking { get; } = "samples/wave-complex-packing.grib2";
 
         public static string EastChina_Japan { get; } = "samples/eastchina_japan.grb2";
+
+		/// <summary>
+		/// ECCC (Environment and Climate Change Canada) MSC HRDPS 2.5 km east.
+		/// A single accumulation record of surface long-wave (thermal) radiation downwards,
+		/// discipline 0 / category 5 / number 3 (WMO standard), Jpeg2000 packed.
+		/// </summary>
+		public static string HrdpsLongWaveRadiationDownwardsFile { get; } = "samples/CMC_hrdps_east_DLWRF_SFC_0_ps2.5km_2026071918_P001-00.grib2";
 	}
 }

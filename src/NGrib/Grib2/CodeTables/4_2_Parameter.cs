@@ -894,6 +894,10 @@ namespace NGrib.Grib2.CodeTables
 		public static Parameter LongWaveRadiationFlux { get; } =
 			new Parameter(ParameterCategory.LongWaveRadiation, 2, "Long wave radiation flux", "W m-2");
 
+		///<summary>Surface long-wave (thermal) radiation downwards (J m-2)</summary>
+		public static Parameter SurfaceLongWaveRadiationDownwards { get; } = new Parameter(ParameterCategory.LongWaveRadiation, 3,
+			"Surface long-wave (thermal) radiation downwards", "J m-2");
+
 		#endregion
 
 		#region Product Discipline 0: Meteorological products, Parameter Category 6: Cloud
